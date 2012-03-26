@@ -6,3 +6,6 @@ restclient-shared
 --java.net
 --Signpost
 --AppEngine
+
+Versions:
+v0.9 - 2012-03-26 - Initial Version
