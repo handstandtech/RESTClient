@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.handstandtech.restclient.server.RESTUtil;
+import com.handstandtech.restclient.server.util.RESTUtil;
 import com.handstandtech.restclient.shared.model.RequestAuthentication;
 
 public class AWSAuthenticator implements Authenticator {
@@ -25,7 +25,8 @@ public class AWSAuthenticator implements Authenticator {
 	}
 
 	@Override
-	public void authenticate(HttpURLConnection connection) {
+	public void authenticate(Object conn) {
+		HttpURLConnection connection = (HttpURLConnection)conn;
 		String encodedSignature = RESTUtil.encode(signature);
 		connection.setRequestProperty("Authorization", "AWS " + AwsAccessKeyId + ":" + encodedSignature);
 

@@ -38,10 +38,16 @@ public class BasicAuthenticator implements Authenticator {
 	}
 
 	@Override
-	public void authenticate(HttpURLConnection connection) {
-		byte[] usernamePasswordBytes = (username + ":" + password).getBytes();
-		String encodedCredential = Base64.encodeToString(usernamePasswordBytes, Base64.DEFAULT);
-		connection.setRequestProperty("Authorization", "BASIC " + encodedCredential);
+	public void authenticate(Object connectionObject) {
+		if (connectionObject instanceof HttpURLConnection) {
+			HttpURLConnection connection = (HttpURLConnection) connectionObject;
+			byte[] usernamePasswordBytes = (username + ":" + password)
+					.getBytes();
+			String encodedCredential = Base64.encodeToString(
+					usernamePasswordBytes, Base64.DEFAULT);
+			connection.setRequestProperty("Authorization", "BASIC "
+					+ encodedCredential);
+		}
 	}
 
 	@Override

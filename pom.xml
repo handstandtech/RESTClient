@@ -5,7 +5,7 @@
 	<groupId>com.handstandtech</groupId>
 	<artifactId>handstandtech-restclient</artifactId>
 	<packaging>pom</packaging>
-	<version>0.9</version>
+	<version>0.9.1</version>
 	<name>Handstand Technologies - REST Client</name>
 	<modules>
 		<module>restclient-shared</module>

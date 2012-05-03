@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.handstandtech.restclient.server.RESTClient;
 import com.handstandtech.restclient.server.auth.Authenticator;
+import com.handstandtech.restclient.server.model.RESTRequest;
 import com.handstandtech.restclient.shared.model.RESTResult;
 import com.handstandtech.restclient.shared.model.RequestMethod;
 
@@ -23,7 +24,8 @@ import com.handstandtech.restclient.shared.model.RequestMethod;
  */
 public abstract class RESTClientBaseImpl implements RESTClient {
 
-	protected static Logger log = LoggerFactory.getLogger(RESTClientBaseImpl.class);
+	protected static Logger log = LoggerFactory
+			.getLogger(RESTClientBaseImpl.class);
 
 	public RESTClientBaseImpl() {
 		super();
@@ -39,19 +41,36 @@ public abstract class RESTClientBaseImpl implements RESTClient {
 	 * @return
 	 * @throws IOException
 	 */
-	protected abstract RESTResult internalDoRequest(RequestMethod method, String urlString, Authenticator auth, byte[] payload, Map<String, String> headers) throws IOException;
+	protected abstract RESTResult internalDoRequest(RequestMethod method,
+			String urlString, Authenticator auth, byte[] payload,
+			Map<String, String> headers) throws IOException;
+
+	@Override
+	public RESTResult request(RESTRequest request) {
+		RESTResult result = null;
+		try {
+			result = internalDoRequest(request.getMethod(), request.getUrl(),
+					request.getAuth(), request.getPayload(),
+					request.getHeaders());
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		}
+		return result;
+	}
 
 	/**
 	 * @see RESTClient#request(RequestMethod, String, Authenticator)
 	 */
 	@Override
-	public RESTResult request(RequestMethod method, String urlString, Authenticator auth) {
+	public RESTResult request(RequestMethod method, String urlString,
+			Authenticator auth) {
+		RESTResult result = null;
 		try {
-			return internalDoRequest(method, urlString, auth, null, null);
-		} catch (IOException e) {
+			result = internalDoRequest(method, urlString, auth, null, null);
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		return null;
+		return result;
 	}
 
 	/**
@@ -59,7 +78,8 @@ public abstract class RESTClientBaseImpl implements RESTClient {
 	 *      byte[])
 	 */
 	@Override
-	public RESTResult requestWithBody(RequestMethod method, String urlString, Authenticator auth, byte[] payload) {
+	public RESTResult requestWithBody(RequestMethod method, String urlString,
+			Authenticator auth, byte[] payload) {
 		try {
 			return internalDoRequest(method, urlString, auth, payload, null);
 		} catch (IOException e) {
@@ -85,7 +105,8 @@ public abstract class RESTClientBaseImpl implements RESTClient {
 	 * @see RESTClient#requestWithBody(RequestMethod, String, byte[])
 	 */
 	@Override
-	public RESTResult requestWithBody(RequestMethod method, String urlString, byte[] payload) {
+	public RESTResult requestWithBody(RequestMethod method, String urlString,
+			byte[] payload) {
 		try {
 			return internalDoRequest(method, urlString, null, payload, null);
 		} catch (IOException e) {
@@ -95,7 +116,8 @@ public abstract class RESTClientBaseImpl implements RESTClient {
 	}
 
 	@Override
-	public RESTResult request(RequestMethod method, String urlString, Map<String, String> headers) {
+	public RESTResult request(RequestMethod method, String urlString,
+			Map<String, String> headers) {
 		try {
 			return internalDoRequest(method, urlString, null, null, headers);
 		} catch (IOException e) {

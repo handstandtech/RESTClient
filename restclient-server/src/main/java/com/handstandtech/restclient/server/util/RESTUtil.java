@@ -2,7 +2,7 @@
  * Handstand Technologies, LLC
  * http://handstandtech.com
  */
-package com.handstandtech.restclient.server;
+package com.handstandtech.restclient.server.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
