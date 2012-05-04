@@ -25,6 +25,10 @@
 			<organizationUrl>http://handstandtech.com</organizationUrl>
 		</developer>
 	</developers>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/handstandtech/RESTClient/issues</url>
+	</issueManagement>
 	<repositories>
 		<repository>
 			<id>maven-central</id>
