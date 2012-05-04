@@ -5,7 +5,7 @@
 	<groupId>com.handstandtech</groupId>
 	<artifactId>handstandtech-restclient</artifactId>
 	<packaging>pom</packaging>
-	<version>0.9.1</version>
+	<version>0.9.2-SNAPSHOT</version>
 	<name>Handstand Technologies - REST Client</name>
 	<modules>
 		<module>restclient-shared</module>
@@ -19,7 +19,10 @@
 		<developer>
 			<id>handstandsam</id>
 			<name>Sam Edwards</name>
+			<url>http://handstandsam.com</url>
 			<email>sam@handstandtech.com</email>
+			<organization>Handsdtand Technologies, LLC</organization>
+			<organizationUrl>http://handstandtech.com</organizationUrl>
 		</developer>
 	</developers>
 	<repositories>
@@ -118,7 +121,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>net.kindleit</groupId>
 				<artifactId>maven-gae-plugin</artifactId>
@@ -146,6 +148,7 @@
 				</includes>
 			</resource>
 		</resources>
-		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+		<outputDirectory>target</outputDirectory>
+		<directory>../mavenrepo/com/handstandtech/${project.artifactId}/${project.version}/</directory>
 	</build>
 </project>

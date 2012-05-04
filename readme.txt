@@ -1,6 +1,9 @@
 restclient-shared
 -Can be used indepentently for creating REST Urls
 
+NOTE:
+This repository can change structure without notice.
+
 restclient-shared
 -Server/Android Implementation
 --java.net
